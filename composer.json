@@ -1,0 +1,24 @@
+{
+    "name": "slatiusa/yii2-treetable",
+    "description": "Yii 2.0 implementation of tree table behavior using jquery-treetable plugin.",
+    "keywords": ["yii2", "extension", "widget", "treetable", "Gridview", "jquery"],
+    "homepage": "https://github.com/ASlatius/yii2-treetable",
+    "type": "yii2-extension",
+    "license": "BSD 3-Clause",
+    "authors": [
+        {
+            "name": "Arno Slatius",
+            "email": "a.slatius@gmail.com"
+        }
+    ],
+    "extra": {
+        "require-bower": {
+            "jquery-treetable": "*"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "slatiusa\\": ""
+        }
+    }
+}
