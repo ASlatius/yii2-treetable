@@ -9,35 +9,48 @@
 namespace slatiusa\treetable;
 
 use \Yii;
-use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
+use yii\grid\GridView;
+use yii\helpers\Json;
+use slatiusa\treetable\TreetableAsset;
 
-class Treetable extends \yii\grid\GridView
+class Treetable extends GridView
 {
+    /**
+    * @var array configuration options for the treetable() component
+    */
+    public $treetableOptions = ['expandable' => true, 'indent' => 0];
+    
+    /**
+    * @var boolean load default theme
+    */
+    public $treetableTheme = false;
+    
+    /**
+     * @var integer a counter used to generate [[id]] for widgets.
+     * @internal
+     */
+    public static $counter = 0;
+    
 	/**
 	 * Initializes the widget
+     * 
+     * Register the assets and activate the jquery.treetable() on the table
 	 */
 	public function init() {
-        Yii::$app->assetManager->loadBundle('ASlatius\treetable\TreetableAsset');
-
+        
+        /* Register the assets */
+        TreetableAsset::register($this->view, $this->treetableTheme);
+        
+        /* Determine table id */
+        if (in_array('id', $this->tableOptions))
+            $id = $this->tableOptions['id'];
+        else
+            $this->tableOptions['id'] = 'treetable' . static::$counter++;;
+        
+        /* Activate the jquery code */
+        $options = Json::htmlEncode($this->treetableOptions);
+        $this->view->registerJs("$('#".$this->tableOptions['id']."').treetable(".$options.");");
+        
+        parent::init();
 	}
-
-	/**
-	 * Runs the widget
-	 *
-	 * @return string|void
-	 */
-	public function run() {
-        parent::run();
-    }
-
-	/**
-	 * Register client assets
-	 */
-//	public function registerAssets() {
-//		$view = $this->getView();
-//		NestableAsset::register($view);
-//		$this->registerPlugin('nestable');
-//	}
 }

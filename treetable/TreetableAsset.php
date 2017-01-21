@@ -20,4 +20,15 @@ class TreetableAsset extends \Yii\web\AssetBundle {
     public $depends = [
        'yii\web\JqueryAsset',
     ];
+    
+    /**
+     * @inheritdoc
+     */
+    public static function register($view, $useDefaultTheme=false)
+    {
+        if ($useDefaultTheme) {
+            $css[] = 'css/jquery.treetable.theme.default.css';
+        }
+        parent::register($view);
+    }
 }
