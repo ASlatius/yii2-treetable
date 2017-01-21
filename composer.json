@@ -11,10 +11,8 @@
             "email": "a.slatius@gmail.com"
         }
     ],
-    "extra": {
-        "require-bower": {
-            "jquery-treetable": "*"
-        }
+    "require": {
+        "bower-asset/jquery-treetable": "^3.2.*"
     },
     "autoload": {
         "psr-4": {
